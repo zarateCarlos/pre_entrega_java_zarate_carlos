@@ -1,4 +1,4 @@
-package src;
+package src.modelos;
 
 public class Categoria {
     private int id;

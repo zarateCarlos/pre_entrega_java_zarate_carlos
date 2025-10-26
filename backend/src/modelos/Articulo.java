@@ -1,4 +1,4 @@
-package src;
+package src.modelos;
 
 public class Articulo {
     // Encapsulamiento

@@ -1,7 +1,11 @@
-package src;
+package src.gestores;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import src.crud.CrudArticulos;
+import src.crud.CrudCategorias;
+import src.modelos.Producto;
 
 public class GestorProductos {
 

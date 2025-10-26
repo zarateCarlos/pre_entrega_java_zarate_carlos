@@ -2,6 +2,10 @@ package src;
 
 import java.util.Scanner;
 
+import src.crud.CrudArticulos;
+import src.crud.CrudCategorias;
+import src.gestores.GestorProductos;
+
 
 
 public class Main {

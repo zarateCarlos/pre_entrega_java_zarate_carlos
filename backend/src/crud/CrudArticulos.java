@@ -1,18 +1,20 @@
-package src;
+package src.crud;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CrudArticulos {
+import src.interfaces.CrudBasico;
+import src.modelos.Articulo;
+
+public class CrudArticulos implements CrudBasico<Articulo> {
 
     private final ArrayList<Articulo> listaArticulos = new ArrayList<>();
     private final Scanner scanner = new Scanner(System.in);
+
     public ArrayList<Articulo> getListaArticulos() {
-    return listaArticulos;
-}
+        return listaArticulos;
+    }
 
-
-   
     public void iniciar() {
         int opcion;
         do {
@@ -27,18 +29,21 @@ public class CrudArticulos {
             opcion = leerEntero();
 
             switch (opcion) {
-                case 1 -> crearArticulo();
-                case 2 -> listarArticulos();
-                case 3 -> modificarArticulo();
-                case 4 -> eliminarArticulo();
+                case 1 -> crear();
+                case 2 -> listar();
+                case 3 -> actualizar();
+                case 4 -> eliminar();
                 case 0 -> System.out.println("Volviendo al menú principal...");
                 default -> System.out.println("Opción inválida.");
             }
         } while (opcion != 0);
     }
 
- 
-    public void crearArticulo() {
+    // Metodos de la interfaz CRUD
+   
+
+    @Override
+    public void crear() {
         System.out.println("=== Crear Artículo ===");
 
         System.out.print("ID: ");
@@ -46,7 +51,7 @@ public class CrudArticulos {
 
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();
-       
+
         System.out.print("Descripción: ");
         String descripcion = scanner.nextLine();
 
@@ -59,7 +64,8 @@ public class CrudArticulos {
         System.out.println("Artículo agregado correctamente.\n");
     }
 
-    public void listarArticulos() {
+    @Override
+    public void listar() {
         System.out.println("=== Lista de Artículos ===");
 
         if (listaArticulos.isEmpty()) {
@@ -73,7 +79,8 @@ public class CrudArticulos {
         System.out.println();
     }
 
-    public void modificarArticulo() {
+    @Override
+    public void actualizar() {
         System.out.println("=== Modificar Artículo ===");
         System.out.print("Ingrese ID del artículo: ");
         int id = leerEntero();
@@ -85,10 +92,10 @@ public class CrudArticulos {
             return;
         }
 
-       System.out.print("Nuevo nombre: ");
+        System.out.print("Nuevo nombre: ");
         String nuevoNombre = scanner.nextLine();
 
-        System.out.print("Nuevadescripción: ");
+        System.out.print("Nueva descripción: ");
         String nuevaDescripcion = scanner.nextLine();
 
         System.out.print("Nuevo precio: ");
@@ -101,11 +108,11 @@ public class CrudArticulos {
         System.out.println("Artículo modificado correctamente.\n");
     }
 
-    public void eliminarArticulo() {
+    @Override
+    public void eliminar() {
         System.out.println("=== Eliminar Artículo ===");
         System.out.print("Ingrese ID del artículo: ");
         int id = leerEntero();
-
 
         Articulo encontrado = buscarPorId(id);
 
@@ -118,7 +125,10 @@ public class CrudArticulos {
         System.out.println("Artículo eliminado correctamente.\n");
     }
 
-    // Métodos auxiliares
+   
+    // Metodos auxiliares
+   
+
     private Articulo buscarPorId(int id) {
         for (Articulo art : listaArticulos) {
             if (art.getId() == id) return art;
